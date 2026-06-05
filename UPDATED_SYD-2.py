@@ -76,6 +76,7 @@ defaults = {
 # Decision Linking
 # -------------------------
 "strategy_memory": {
+    "quarter_decisions": [],
     "supplier": None,
     "inventory": None,
 },
@@ -247,7 +248,24 @@ def save_strategy(category, value):
 
 def get_strategy(category):
     return st.session_state.strategy_memory.get(category)
+def save_decision_memory(
+    quarter,
+    department,
+    decision,
+    rationale,
+    expected_outcome=""
+):
+    memory = {
+        "quarter": quarter,
+        "department": department,
+        "decision": decision,
+        "rationale": rationale,
+        "expected_outcome": expected_outcome
+    }
 
+    st.session_state.strategy_memory[
+        "quarter_decisions"
+    ].append(memory)
 def risk_label(score):
     if score <= 30:
         return "Low"
@@ -1975,7 +1993,13 @@ if st.button(
     st.session_state.motivations[
         f"Q{st.session_state.quarter}_Purchasing"
     ] = motivation.strip()
-
+    save_decision_memory(
+    quarter=st.session_state.quarter,
+    department="Purchasing",
+    decision=choice,
+    rationale=motivation.strip(),
+    expected_outcome="Improve purchasing performance"
+)
     if motivation.strip() == "":
         st.warning(
             "Consider explaining your reasoning. Supply chain decisions should be justified."
@@ -1984,7 +2008,7 @@ if st.button(
             st.warning(
                 "Consider explaining your reasoning. Supply chain decisions should be justified using cost, service, risk or sustainability factors."
             ) 
-            if "Purchasing" not in st.session_state.completed_games:
+    if "Purchasing" not in st.session_state.completed_games:
                 if choice == "Split purchasing between both suppliers":
                     impact = apply_kpi_change(score=8, profit=-60000, service=5, sustainability=2, lead_time=-2, risk=-8)
                 elif choice == "Switch to the reliable European supplier":

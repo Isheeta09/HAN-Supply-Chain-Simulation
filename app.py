@@ -93,7 +93,7 @@ defaults = {
 # -----------------------------
 # OpenAI
 # -----------------------------
-"openai_enabled": False,
+"openai_enabled": True,
 "openai_api_key": "",
 
 "decision_log": [],
@@ -2407,14 +2407,13 @@ elif page == "📋 Quarter Summary":
 # AI Learning Coach
 # =====================================
 
-if st.session_state.openai_enabled:
+if True:
 
     st.markdown("## 🤖 AI Learning Coach")
 
-    ai_feedback = generate_ai_learning_feedback()
+    ai_feedback = "TEST: AI coach section is working."
 
-    if ai_feedback:
-        st.info(ai_feedback)
+    st.info(ai_feedback)
 
 col_progress, col_status = st.columns([2, 1])
 

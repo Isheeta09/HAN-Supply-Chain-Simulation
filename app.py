@@ -1,6 +1,7 @@
 
 import streamlit as st
 import pandas as pd
+from openai import OpenAI
 
 st.set_page_config(
     page_title="Supply Chain Game HAN",
@@ -63,12 +64,40 @@ defaults = {
     "supply_chain_chosen": None,
     "supply_chain_confirmed": False,
 
-    "game_started": False,
-    "game_paused": False,
-    "completed_games": [],
-    "decision_log": [],
+   "game_started": False,
+"game_paused": False,
+"completed_games": [],
 
-    "history": [],
+# -----------------------------
+# AI / Adaptive Learning System
+# -----------------------------
+"strategy_memory": [],
+"reflection_answers": [],
+"ai_feedback_history": [],
+"current_round_rationale": {},
+
+# -----------------------------
+# Dynamic Game Memory
+# -----------------------------
+"strategic_flags": {
+    "single_source": False,
+    "supplier_diversified": False,
+    "high_inventory": False,
+    "lean_inventory": False,
+    "aggressive_sales": False,
+    "conservative_sales": False,
+    "fast_transport": False,
+    "resilient_network": False,
+},
+
+# -----------------------------
+# OpenAI
+# -----------------------------
+"openai_enabled": False,
+"openai_api_key": "",
+
+"decision_log": [],
+"history": [],
 }
 
 for k, v in defaults.items():
@@ -187,6 +216,92 @@ def sync_quarter_event():
 
 
 sync_quarter_event()
+
+
+# =====================================================
+# OpenAI Learning Coach
+# =====================================================
+
+def get_openai_client():
+
+    api_key = st.session_state.get("openai_api_key", "")
+
+    if not api_key:
+        return None
+
+    try:
+        return OpenAI(api_key=api_key)
+    except Exception:
+        return None
+
+
+def generate_ai_learning_feedback():
+
+    client = get_openai_client()
+
+    if client is None:
+        return None
+
+    try:
+
+        recent_decisions = st.session_state.decision_log[-6:]
+        strategy_memory = st.session_state.strategy_memory[-6:]
+
+        prompt = f"""
+You are an educational supply chain management coach.
+
+Current Quarter:
+{st.session_state.quarter}
+
+Current Event:
+{st.session_state.event}
+
+Current KPIs:
+
+Score: {st.session_state.score}
+Profit: {st.session_state.net_profit}
+Service Level: {st.session_state.service_level}
+ESG: {st.session_state.sustainability_score}
+Risk: {st.session_state.risk_level}
+Lead Time: {st.session_state.lead_time_days}
+
+Recent Decisions:
+{recent_decisions}
+
+Strategy Memory:
+{strategy_memory}
+
+Explain:
+
+1. Why the results happened.
+2. Which supply chain concepts are involved.
+3. Whether previous decisions affected this outcome.
+4. One reflection question for students.
+
+Maximum 250 words.
+"""
+
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content":
+                    "You are a university-level supply chain learning coach."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.6
+        )
+
+        return response.choices[0].message.content
+
+    except Exception as e:
+
+        return f"AI feedback unavailable: {str(e)}"
 
 
 def money(value):

@@ -1,7 +1,5 @@
 # HAN Supply Chain Simulation
-An interactive Supply Chain Management simulation developed using **Python**, **Streamlit**, **Pandas**, and AI-supported reflective learning components for HAN University of Applied Sciences.
-
-The application allows students to experience real-world supply chain decision-making by managing Purchasing, Operations, Sales, and Supply Chain departments while balancing profitability, service level, sustainability, inventory, lead time, and risk.
+An interactive Supply Chain Management simulation developed using **Python**, **Streamlit**, **Pandas**, and AI-supported reflective learning components for HAN University of Applied Sciences. The application allows students to experience real-world supply chain decision-making by managing Purchasing, Operations, Sales, and Supply Chain departments while balancing profitability, service level, sustainability, inventory, lead time, and risk.
 ---
 
 ## Project Objective

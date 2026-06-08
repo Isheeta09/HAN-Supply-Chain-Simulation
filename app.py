@@ -2398,7 +2398,7 @@ elif page == "📋 Quarter Summary":
 # AI Learning Coach
 # =====================================
 
-if True:
+    if True:
 
     st.markdown("## 🤖 AI Learning Coach")
 
@@ -2406,9 +2406,9 @@ if True:
 
     st.info(ai_feedback)
 
-col_progress, col_status = st.columns([2, 1])
+    col_progress, col_status = st.columns([2, 1])
 
-with col_progress:
+    with col_progress:
         st.markdown("### Department progress")
         required_departments = get_required_departments_for_round()
         completed_required = get_completed_required_departments()
@@ -2419,7 +2419,7 @@ with col_progress:
             f"{', '.join(required_departments)}"
         )
 
-with col_status:
+    with col_status:
         if is_round_complete():
             if len(get_required_departments_for_round()) < 4:
                 st.success("Partial department round completed.")
@@ -2428,30 +2428,30 @@ with col_status:
         else:
             st.warning("Round not fully completed.")
 
-st.markdown("---")
+        st.markdown("---")
 
-st.markdown("### KPI result")
+    st.markdown("### KPI result")
 
-c1, c2, c3, c4 = st.columns(4)
-c1.metric("Efficiency Score", f"{st.session_state.score}/100")
-c2.metric("Net Profit", money(st.session_state.net_profit))
-c3.metric("Service Level", f"{st.session_state.service_level}%")
-c4.metric("ESG Rating", sustainability_rating(st.session_state.sustainability_score))
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Efficiency Score", f"{st.session_state.score}/100")
+    c2.metric("Net Profit", money(st.session_state.net_profit))
+    c3.metric("Service Level", f"{st.session_state.service_level}%")
+    c4.metric("ESG Rating", sustainability_rating(st.session_state.sustainability_score))
 
-c5, c6, c7 = st.columns(3)
-c5.metric("Inventory Value", money(st.session_state.inventory_value))
-c6.metric("Lead Time", f"{st.session_state.lead_time_days} days")
-c7.metric("Supply Chain Risk", f"{st.session_state.risk_level}/100", risk_label(st.session_state.risk_level))
+    c5, c6, c7 = st.columns(3)
+    c5.metric("Inventory Value", money(st.session_state.inventory_value))
+    c6.metric("Lead Time", f"{st.session_state.lead_time_days} days")
+    c7.metric("Supply Chain Risk", f"{st.session_state.risk_level}/100", risk_label(st.session_state.risk_level))
 
-st.markdown("---")
+    st.markdown("---")
 
-st.markdown("### Quarter interpretation")
+    st.markdown("### Quarter interpretation")
 
-title, explanation = strategy_type()
+    title, explanation = strategy_type()
 
-col_profile, col_comment = st.columns([1, 1.4])
+    col_profile, col_comment = st.columns([1, 1.4])
 
-with col_profile:
+    with col_profile:
     st.markdown(f"""
 <div class="white-card">
 <div class="card-label">Strategic profile</div>
@@ -2460,33 +2460,33 @@ with col_profile:
 </div>
 """, unsafe_allow_html=True)
 
-with col_comment:
-        st.markdown(f"""
+    with col_comment:
+    st.markdown(f"""
 <div class="white-card">
 <div class="card-label">Management summary</div>
 <p class="kpi-note">{quarter_kpi_comment()}</p>
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("---")
+    st.markdown("---")
 
-st.markdown("### Department decisions this quarter")
+    st.markdown("### Department decisions this quarter")
 
-if decisions:
-        show_clean_decision_table(decisions)
-else:
-        st.info("No decisions have been made in this quarter yet.")
+    if decisions:
+    show_clean_decision_table(decisions)
+    else:
+    st.info("No decisions have been made in this quarter yet.")
 
-if st.session_state.get("lock_peer_comparison", False) and not is_instructor_unlocked():
-        st.markdown("---")
-        render_locked_message("Class comparison is locked")
-else:
-        show_peer_comparison()
+    if st.session_state.get("lock_peer_comparison", False) and not is_instructor_unlocked():
+    st.markdown("---")
+    render_locked_message("Class comparison is locked")
+    else:
+    show_peer_comparison()
 
-st.markdown("---")
+    st.markdown("---")
 
-st.markdown("### Group reflection")
-st.markdown("""
+    st.markdown("### Group reflection")
+    st.markdown("""
 Use these questions to discuss the quarter with your group:
 
 1. Which department decision had the strongest positive or negative KPI impact?
@@ -2495,17 +2495,17 @@ Use these questions to discuss the quarter with your group:
 4. What would you change in the next quarter?
     """)
 
-st.markdown("---")
+    st.markdown("---")
 
-if st.session_state.quarter < 8:
-        if st.button("➡️ Continue to next quarter", type="primary"):
+    if st.session_state.quarter < 8:
+    if st.button("➡️ Continue to next quarter", type="primary"):
             continue_to_next_quarter()
-else:
-        if st.button("🏁 Go to final report", type="primary"):
+    else:
+    if st.button("🏁 Go to final report", type="primary"):
             continue_to_next_quarter()
 
 
-elif page == "💰 Financials":
+    elif page == "💰 Financials":
     st.title("Financial Statements")
     st.caption("Auto-generated based on current KPI performance and player decisions.")
 

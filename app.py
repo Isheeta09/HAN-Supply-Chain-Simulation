@@ -1,7 +1,6 @@
-
+from openai import OpenAI
 import streamlit as st
 import pandas as pd
-from openai import OpenAI
 
 st.set_page_config(
     page_title="Supply Chain Game HAN",

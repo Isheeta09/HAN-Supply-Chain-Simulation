@@ -2021,7 +2021,7 @@ The company currently buys many components from a low-cost overseas supplier. Th
         if port_disruption:
             st.warning("Sea freight disruption is active. Overseas suppliers have a higher delivery risk.")
 
-                       options = {
+        options = {
             "Stay with the low-cost overseas supplier":
                 "Lowest purchase price, but higher exposure to delays, tariffs and supply disruption.",
             "Switch to the reliable European supplier":

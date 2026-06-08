@@ -787,14 +787,14 @@ def get_current_event_note():
     event = get_event_for_quarter(st.session_state.quarter)
 
     if code == "current_state":
-    return "The company is analysing its current supply chain. The focus is on understanding KPIs and identifying bottlenecks."
+        return "The company is analysing its current supply chain. The focus is on understanding KPIs and identifying bottlenecks."
     if code == "supplier_strategy":
-    return "Suppliers differ in cost, quality and reliability. Purchasing decisions should balance cost savings and supply risk."
+        return "Suppliers differ in cost, quality and reliability. Purchasing decisions should balance cost savings and supply risk."
     if code == "rotterdam_strike":
-    if st.session_state.strategic_flags.get("resilient_network", False):
-        return (
-            "Your earlier supplier diversification and European sourcing decisions "
-            "reduced exposure to the Rotterdam strike."
+        if st.session_state.strategic_flags.get("resilient_network", False):
+            return (
+                "Your earlier supplier diversification and European sourcing decisions "
+                "reduced exposure to the Rotterdam strike."
         )
     elif st.session_state.strategic_flags.get("supplier_diversified", False):
         return (
@@ -804,7 +804,7 @@ def get_current_event_note():
         "The company remains highly dependent on overseas sourcing."
     )
     if code == "demand_surge":
-    return "Customer demand increases unexpectedly..."
+        return "Customer demand increases unexpectedly..."
     if code == "sustainability_pressure":
         return "Customers demand greener sourcing. ESG performance becomes more important, but sustainable choices may affect costs."
     if code == "tariff":

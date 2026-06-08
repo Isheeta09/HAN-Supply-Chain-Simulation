@@ -2398,60 +2398,69 @@ elif page == "📋 Quarter Summary":
 # AI Learning Coach
 # =====================================
 
-if True:
-
 st.markdown("## 🤖 AI Learning Coach")
 
 ai_feedback = "TEST: AI coach section is working."
+st.info(ai_feedback)
 
-    st.info(ai_feedback)
+col_progress, col_status = st.columns([2, 1])
 
-        col_progress, col_status = st.columns([2, 1])
+with col_progress:
+    st.markdown("### Department progress")
+    required_departments = get_required_departments_for_round()
+    completed_required = get_completed_required_departments()
 
-        with col_progress:
-        st.markdown("### Department progress")
-        required_departments = get_required_departments_for_round()
-        completed_required = get_completed_required_departments()
-        progress_value = len(completed_required) / len(required_departments) if required_departments else 0
-        st.progress(progress_value)
-        st.caption(
-            f"{len(completed_required)}/{len(required_departments)} required department(s) completed: "
-            f"{', '.join(required_departments)}"
-        )
+    progress_value = (
+        len(completed_required) / len(required_departments)
+        if required_departments else 0
+    )
 
-        with col_status:
-        if is_round_complete():
-            if len(get_required_departments_for_round()) < 4:
-                st.success("Partial department round completed.")
-            else:
-                st.success("Quarter completed.")
+    st.progress(progress_value)
+
+    st.caption(
+        f"{len(completed_required)}/{len(required_departments)} required department(s) completed: "
+        f"{', '.join(required_departments)}"
+    )
+
+with col_status:
+    if is_round_complete():
+        if len(get_required_departments_for_round()) < 4:
+            st.success("Partial department round completed.")
         else:
-            st.warning("Round not fully completed.")
+            st.success("Quarter completed.")
+    else:
+        st.warning("Round not fully completed.")
 
-        st.markdown("---")
+st.markdown("---")
 
-    st.markdown("### KPI result")
+st.markdown("### KPI result")
 
-    c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Efficiency Score", f"{st.session_state.score}/100")
-    c2.metric("Net Profit", money(st.session_state.net_profit))
-    c3.metric("Service Level", f"{st.session_state.service_level}%")
-    c4.metric("ESG Rating", sustainability_rating(st.session_state.sustainability_score))
+c1, c2, c3, c4 = st.columns(4)
 
-    c5, c6, c7 = st.columns(3)
-    c5.metric("Inventory Value", money(st.session_state.inventory_value))
-    c6.metric("Lead Time", f"{st.session_state.lead_time_days} days")
-    c7.metric("Supply Chain Risk", f"{st.session_state.risk_level}/100", risk_label(st.session_state.risk_level))
+c1.metric("Efficiency Score", f"{st.session_state.score}/100")
+c2.metric("Net Profit", money(st.session_state.net_profit))
+c3.metric("Service Level", f"{st.session_state.service_level}%")
+c4.metric("ESG Rating", sustainability_rating(st.session_state.sustainability_score))
 
-    st.markdown("---")
+c5, c6, c7 = st.columns(3)
 
-    st.markdown("### Quarter interpretation")
+c5.metric("Inventory Value", money(st.session_state.inventory_value))
+c6.metric("Lead Time", f"{st.session_state.lead_time_days} days")
+c7.metric(
+    "Supply Chain Risk",
+    f"{st.session_state.risk_level}/100",
+    risk_label(st.session_state.risk_level),
+)
 
-    title, explanation = strategy_type()
+st.markdown("---")
 
-    col_profile, col_comment = st.columns([1, 1.4])
+st.markdown("### Quarter interpretation")
 
-    with col_profile:
+title, explanation = strategy_type()
+
+col_profile, col_comment = st.columns([1, 1.4])
+
+with col_profile:
     st.markdown(f"""
 <div class="white-card">
 <div class="card-label">Strategic profile</div>
@@ -2460,7 +2469,7 @@ ai_feedback = "TEST: AI coach section is working."
 </div>
 """, unsafe_allow_html=True)
 
-    with col_comment:
+with col_comment:
     st.markdown(f"""
 <div class="white-card">
 <div class="card-label">Management summary</div>
@@ -2468,41 +2477,42 @@ ai_feedback = "TEST: AI coach section is working."
 </div>
 """, unsafe_allow_html=True)
 
-    st.markdown("---")
+st.markdown("---")
 
-    st.markdown("### Department decisions this quarter")
+st.markdown("### Department decisions this quarter")
 
-    if decisions:
+if decisions:
     show_clean_decision_table(decisions)
-    else:
+else:
     st.info("No decisions have been made in this quarter yet.")
 
-    if st.session_state.get("lock_peer_comparison", False) and not is_instructor_unlocked():
+if st.session_state.get("lock_peer_comparison", False) and not is_instructor_unlocked():
     st.markdown("---")
     render_locked_message("Class comparison is locked")
-    else:
+else:
     show_peer_comparison()
 
-    st.markdown("---")
+st.markdown("---")
 
-    st.markdown("### Group reflection")
-    st.markdown("""
+st.markdown("### Group reflection")
+
+st.markdown("""
 Use these questions to discuss the quarter with your group:
 
 1. Which department decision had the strongest positive or negative KPI impact?
 2. Did your team focus more on profit, service level, sustainability or risk?
 3. Did the departments support each other, or did one department create pressure for another?
 4. What would you change in the next quarter?
-    """)
+""")
 
-    st.markdown("---")
+st.markdown("---")
 
-    if st.session_state.quarter < 8:
+if st.session_state.quarter < 8:
     if st.button("➡️ Continue to next quarter", type="primary"):
-            continue_to_next_quarter()
-    else:
+        continue_to_next_quarter()
+else:
     if st.button("🏁 Go to final report", type="primary"):
-            continue_to_next_quarter()
+        continue_to_next_quarter()
 
 
     elif page == "💰 Financials":

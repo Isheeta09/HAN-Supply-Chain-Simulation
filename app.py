@@ -787,7 +787,7 @@ def get_current_event_note():
     event = get_event_for_quarter(st.session_state.quarter)
 
     if code == "current_state":
-        return "The company is analysing its current supply chain. The focus is on understanding KPIs and identifying bottlenecks."
+    return "The company is analysing its current supply chain. The focus is on understanding KPIs and identifying bottlenecks."
     if code == "supplier_strategy":
     return "Suppliers differ in cost, quality and reliability. Purchasing decisions should balance cost savings and supply risk."
     if code == "rotterdam_strike":

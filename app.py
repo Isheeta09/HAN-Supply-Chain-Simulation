@@ -2433,26 +2433,26 @@ st.markdown("---")
 st.markdown("### KPI result")
 
 c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Efficiency Score", f"{st.session_state.score}/100")
-    c2.metric("Net Profit", money(st.session_state.net_profit))
-    c3.metric("Service Level", f"{st.session_state.service_level}%")
-    c4.metric("ESG Rating", sustainability_rating(st.session_state.sustainability_score))
+c1.metric("Efficiency Score", f"{st.session_state.score}/100")
+c2.metric("Net Profit", money(st.session_state.net_profit))
+c3.metric("Service Level", f"{st.session_state.service_level}%")
+c4.metric("ESG Rating", sustainability_rating(st.session_state.sustainability_score))
 
-    c5, c6, c7 = st.columns(3)
-    c5.metric("Inventory Value", money(st.session_state.inventory_value))
-    c6.metric("Lead Time", f"{st.session_state.lead_time_days} days")
-    c7.metric("Supply Chain Risk", f"{st.session_state.risk_level}/100", risk_label(st.session_state.risk_level))
+c5, c6, c7 = st.columns(3)
+c5.metric("Inventory Value", money(st.session_state.inventory_value))
+c6.metric("Lead Time", f"{st.session_state.lead_time_days} days")
+c7.metric("Supply Chain Risk", f"{st.session_state.risk_level}/100", risk_label(st.session_state.risk_level))
 
-    st.markdown("---")
+st.markdown("---")
 
-    st.markdown("### Quarter interpretation")
+st.markdown("### Quarter interpretation")
 
-    title, explanation = strategy_type()
+title, explanation = strategy_type()
 
-    col_profile, col_comment = st.columns([1, 1.4])
+col_profile, col_comment = st.columns([1, 1.4])
 
-    with col_profile:
-        st.markdown(f"""
+with col_profile:
+    st.markdown(f"""
 <div class="white-card">
 <div class="card-label">Strategic profile</div>
 <h3>{title}</h3>
@@ -2460,7 +2460,7 @@ c1, c2, c3, c4 = st.columns(4)
 </div>
 """, unsafe_allow_html=True)
 
-    with col_comment:
+with col_comment:
         st.markdown(f"""
 <div class="white-card">
 <div class="card-label">Management summary</div>
@@ -2468,9 +2468,9 @@ c1, c2, c3, c4 = st.columns(4)
 </div>
 """, unsafe_allow_html=True)
 
-    st.markdown("---")
+st.markdown("---")
 
-    st.markdown("### Department decisions this quarter")
+st.markdown("### Department decisions this quarter")
 
     if decisions:
         show_clean_decision_table(decisions)

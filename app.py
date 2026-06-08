@@ -2472,21 +2472,21 @@ st.markdown("---")
 
 st.markdown("### Department decisions this quarter")
 
-    if decisions:
+if decisions:
         show_clean_decision_table(decisions)
-    else:
+else:
         st.info("No decisions have been made in this quarter yet.")
 
-    if st.session_state.get("lock_peer_comparison", False) and not is_instructor_unlocked():
+if st.session_state.get("lock_peer_comparison", False) and not is_instructor_unlocked():
         st.markdown("---")
         render_locked_message("Class comparison is locked")
-    else:
+else:
         show_peer_comparison()
 
-    st.markdown("---")
+st.markdown("---")
 
-    st.markdown("### Group reflection")
-    st.markdown("""
+st.markdown("### Group reflection")
+st.markdown("""
 Use these questions to discuss the quarter with your group:
 
 1. Which department decision had the strongest positive or negative KPI impact?
@@ -2495,12 +2495,12 @@ Use these questions to discuss the quarter with your group:
 4. What would you change in the next quarter?
     """)
 
-    st.markdown("---")
+st.markdown("---")
 
-    if st.session_state.quarter < 8:
+if st.session_state.quarter < 8:
         if st.button("➡️ Continue to next quarter", type="primary"):
             continue_to_next_quarter()
-    else:
+else:
         if st.button("🏁 Go to final report", type="primary"):
             continue_to_next_quarter()
 
@@ -2511,13 +2511,13 @@ elif page == "💰 Financials":
 
     col_fl, col_fr = st.columns(2)
 
-    with col_fl:
-        st.markdown("**Income Statement — Year to Date**")
+with col_fl:
+    st.markdown("**Income Statement — Year to Date**")
 
-        total_previous_revenue = sum(row["Revenue"] for row in st.session_state.history)
-        total_previous_profit = sum(row["Net Profit"] for row in st.session_state.history)
+    total_previous_revenue = sum(row["Revenue"] for row in st.session_state.history)
+    total_previous_profit = sum(row["Net Profit"] for row in st.session_state.history)
 
-        current_quarter_in_history = f"Q{st.session_state.quarter}" in [row["Quarter"] for row in st.session_state.history]
+current_quarter_in_history = f"Q{st.session_state.quarter}" in [row["Quarter"] for row in st.session_state.history]
 
         if current_quarter_in_history:
             total_revenue_ytd = total_previous_revenue

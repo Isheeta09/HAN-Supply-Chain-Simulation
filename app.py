@@ -2261,16 +2261,6 @@ while maintaining acceptable costs.
 
         st.markdown("---")
 
-    st.markdown("""
-### Current situation
-
-The purchasing team diversified sourcing across multiple suppliers.
-
-This reduces dependency on a single source, but transportation disruptions are still creating operational challenges.
-
-The supply chain department must determine how much additional resilience should be added to the logistics network.
-""")
-
     else:
 
         st.markdown("""

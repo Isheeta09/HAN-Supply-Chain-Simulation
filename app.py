@@ -2514,31 +2514,45 @@ else:
     if st.button("🏁 Go to final report", type="primary"):
         continue_to_next_quarter()
 
-
-    elif page == "💰 Financials":
+elif page == "💰 Financials":
     st.title("Financial Statements")
     st.caption("Auto-generated based on current KPI performance and player decisions.")
 
     col_fl, col_fr = st.columns(2)
 
-with col_fl:
-    st.markdown("**Income Statement — Year to Date**")
+    with col_fl:
+        st.markdown("**Income Statement — Year to Date**")
 
-    total_previous_revenue = sum(row["Revenue"] for row in st.session_state.history)
-    total_previous_profit = sum(row["Net Profit"] for row in st.session_state.history)
+        total_previous_revenue = sum(
+            row["Revenue"] for row in st.session_state.history
+        )
+        total_previous_profit = sum(
+            row["Net Profit"] for row in st.session_state.history
+        )
 
-current_quarter_in_history = f"Q{st.session_state.quarter}" in [row["Quarter"] for row in st.session_state.history]
+        current_quarter_in_history = (
+            f"Q{st.session_state.quarter}"
+            in [row["Quarter"] for row in st.session_state.history]
+        )
 
         if current_quarter_in_history:
             total_revenue_ytd = total_previous_revenue
             total_profit_ytd = total_previous_profit
         else:
-            total_revenue_ytd = total_previous_revenue + st.session_state.revenue
-            total_profit_ytd = total_previous_profit + st.session_state.net_profit
+            total_revenue_ytd = (
+                total_previous_revenue + st.session_state.revenue
+            )
+            total_profit_ytd = (
+                total_previous_profit + st.session_state.net_profit
+            )
 
         estimated_cogs = int(total_revenue_ytd * 0.56)
-        estimated_logistics = int(900000 + st.session_state.lead_time_days * 8000)
-        estimated_holding = int(st.session_state.inventory_value * 0.08)
+        estimated_logistics = int(
+            900000 + st.session_state.lead_time_days * 8000
+        )
+        estimated_holding = int(
+            st.session_state.inventory_value * 0.08
+        )
 
         income = [
             ("Current Quarter Revenue", money(st.session_state.revenue), True),
@@ -2552,7 +2566,11 @@ current_quarter_in_history = f"Q{st.session_state.quarter}" in [row["Quarter"] f
         for label, val, pos in income:
             c1, c2 = st.columns([3, 2])
             bold = label in ("Total Revenue YTD", "Net Profit YTD")
-            c1.markdown(f"{'**' if bold else ''}{label}{'**' if bold else ''}")
+
+            c1.markdown(
+                f"{'**' if bold else ''}{label}{'**' if bold else ''}"
+            )
+
             c2.markdown(
                 f"<span style='color:{'#0F6E56' if pos else '#993C1D'};font-family:monospace;'>{'**' if bold else ''}{val}{'**' if bold else ''}</span>",
                 unsafe_allow_html=True,
@@ -2561,11 +2579,28 @@ current_quarter_in_history = f"Q{st.session_state.quarter}" in [row["Quarter"] f
     with col_fr:
         st.markdown("**Balance Sheet — Current Situation**")
 
-        cash = max(0, 2100000 + st.session_state.net_profit - 1240000)
-        accounts_receivable = int(st.session_state.revenue * 0.14)
-        accounts_payable = int(st.session_state.revenue * 0.09)
+        cash = max(
+            0,
+            2100000 + st.session_state.net_profit - 1240000
+        )
+
+        accounts_receivable = int(
+            st.session_state.revenue * 0.14
+        )
+
+        accounts_payable = int(
+            st.session_state.revenue * 0.09
+        )
+
         short_debt = 150000
-        net_equity = cash + st.session_state.inventory_value + accounts_receivable - accounts_payable - short_debt
+
+        net_equity = (
+            cash
+            + st.session_state.inventory_value
+            + accounts_receivable
+            - accounts_payable
+            - short_debt
+        )
 
         balance = [
             ("— ASSETS —", "", None),
@@ -2580,11 +2615,16 @@ current_quarter_in_history = f"Q{st.session_state.quarter}" in [row["Quarter"] f
 
         for label, val, pos in balance:
             c1, c2 = st.columns([3, 2])
+
             if pos is None:
                 c1.markdown(f"**{label}**")
             else:
                 bold = label == "Net Equity"
-                c1.markdown(f"{'**' if bold else ''}{label}{'**' if bold else ''}")
+
+                c1.markdown(
+                    f"{'**' if bold else ''}{label}{'**' if bold else ''}"
+                )
+
                 c2.markdown(
                     f"<span style='color:{'#0F6E56' if pos else '#993C1D'};font-family:monospace;'>{'**' if bold else ''}{val}{'**' if bold else ''}</span>",
                     unsafe_allow_html=True,
@@ -2592,6 +2632,8 @@ current_quarter_in_history = f"Q{st.session_state.quarter}" in [row["Quarter"] f
 
     st.markdown("---")
     st.markdown("### Quarter-by-Quarter Performance")
+
+   
 
     performance_rows = []
 

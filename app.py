@@ -2139,13 +2139,13 @@ while maintaining acceptable costs.
             """, unsafe_allow_html=True)
 
         elif department_tab == "Supply Chain":
-        st.subheader("🚚 Supply Chain Department")
-        st.markdown('<span class="badge-red">Network resilience</span>', unsafe_allow_html=True)
+            st.subheader("🚚 Supply Chain Department")
+            st.markdown('<span class="badge-red">Network resilience</span>', unsafe_allow_html=True)
 
-        sea_disrupted = st.session_state.active_event_code in ["rotterdam_strike", "suez_blockage"]
-        labour_disrupted = st.session_state.active_event_code == "labour_strike"
+            sea_disrupted = st.session_state.active_event_code in ["rotterdam_strike", "suez_blockage"]
+            labour_disrupted = st.session_state.active_event_code == "labour_strike"
 
-        if st.session_state.strategic_flags.get("resilient_network", False):
+            if st.session_state.strategic_flags.get("resilient_network", False):
 
             st.markdown("""
 ### Current situation

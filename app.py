@@ -2408,7 +2408,7 @@ if True:
 
 col_progress, col_status = st.columns([2, 1])
 
-    with col_progress:
+with col_progress:
         st.markdown("### Department progress")
         required_departments = get_required_departments_for_round()
         completed_required = get_completed_required_departments()
@@ -2419,7 +2419,7 @@ col_progress, col_status = st.columns([2, 1])
             f"{', '.join(required_departments)}"
         )
 
-    with col_status:
+with col_status:
         if is_round_complete():
             if len(get_required_departments_for_round()) < 4:
                 st.success("Partial department round completed.")

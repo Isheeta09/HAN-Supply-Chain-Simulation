@@ -2260,7 +2260,9 @@ The supply chain department must take action to reduce disruption risk while mai
             </div>
             """, unsafe_allow_html=True)
 
-    st.markdown("---")
+        st.markdown("---")
+
+    st.markdown("""
 ### Current situation
 
 The purchasing team diversified sourcing across multiple suppliers.

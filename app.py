@@ -2406,9 +2406,9 @@ ai_feedback = "TEST: AI coach section is working."
 
     st.info(ai_feedback)
 
-    col_progress, col_status = st.columns([2, 1])
+        col_progress, col_status = st.columns([2, 1])
 
-    with col_progress:
+        with col_progress:
         st.markdown("### Department progress")
         required_departments = get_required_departments_for_round()
         completed_required = get_completed_required_departments()
@@ -2419,7 +2419,7 @@ ai_feedback = "TEST: AI coach section is working."
             f"{', '.join(required_departments)}"
         )
 
-    with col_status:
+        with col_status:
         if is_round_complete():
             if len(get_required_departments_for_round()) < 4:
                 st.success("Partial department round completed.")

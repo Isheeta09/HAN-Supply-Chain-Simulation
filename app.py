@@ -2157,7 +2157,7 @@ while maintaining acceptable costs.
                 The supply chain department must decide whether to further strengthen resilience or optimize transportation costs.
                 """)
 
-                elif st.session_state.strategic_flags.get("supplier_diversified", False):
+            elif st.session_state.strategic_flags.get("supplier_diversified", False):
 
                 st.markdown("""
                 ### Current situation
@@ -2169,7 +2169,7 @@ while maintaining acceptable costs.
                 The supply chain department must determine how much additional resilience should be added to the logistics network.
                 """)
 
-                else:
+            else:
 
                 st.markdown("""
                 ### Current situation

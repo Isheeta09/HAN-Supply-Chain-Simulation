@@ -2428,11 +2428,11 @@ with col_status:
         else:
             st.warning("Round not fully completed.")
 
-    st.markdown("---")
+st.markdown("---")
 
-    st.markdown("### KPI result")
+st.markdown("### KPI result")
 
-    c1, c2, c3, c4 = st.columns(4)
+c1, c2, c3, c4 = st.columns(4)
     c1.metric("Efficiency Score", f"{st.session_state.score}/100")
     c2.metric("Net Profit", money(st.session_state.net_profit))
     c3.metric("Service Level", f"{st.session_state.service_level}%")

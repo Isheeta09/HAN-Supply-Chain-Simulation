@@ -2147,39 +2147,39 @@ while maintaining acceptable costs.
 
             if st.session_state.strategic_flags.get("resilient_network", False):
 
-            st.markdown("""
-### Current situation
+                st.markdown("""
+                ### Current situation
 
-The purchasing team previously selected a more resilient supplier strategy.
+                The purchasing team previously selected a more resilient supplier strategy.
 
-The Rotterdam disruption is still affecting logistics, but supplier reliability and regional sourcing are helping reduce the impact.
+                The Rotterdam disruption is still affecting logistics, but supplier reliability and regional sourcing are helping reduce the impact.
 
-The supply chain department must decide whether to further strengthen resilience or optimize transportation costs.
-""")
+                The supply chain department must decide whether to further strengthen resilience or optimize transportation costs.
+                """)
 
-        elif st.session_state.strategic_flags.get("supplier_diversified", False):
+                elif st.session_state.strategic_flags.get("supplier_diversified", False):
 
-            st.markdown("""
-### Current situation
+                st.markdown("""
+                ### Current situation
 
-The purchasing team diversified sourcing across multiple suppliers.
+                The purchasing team diversified sourcing across multiple suppliers.
 
-This reduces dependency on a single source, but transportation disruptions are still creating operational challenges.
+                This reduces dependency on a single source, but transportation disruptions are still creating operational challenges.
 
-The supply chain department must determine how much additional resilience should be added to the logistics network.
-""")
+                The supply chain department must determine how much additional resilience should be added to the logistics network.
+                """)
 
-        else:
+                else:
 
-            st.markdown("""
-### Current situation
+                st.markdown("""
+                ### Current situation
 
-The company remains highly dependent on a low-cost overseas supplier.
+                The company remains highly dependent on a low-cost overseas supplier.
 
-The Rotterdam disruption is causing major delivery delays and exposing weaknesses in the current logistics network.
+                The Rotterdam disruption is causing major delivery delays and exposing weaknesses in the current logistics network.
 
-The supply chain department must take action to reduce disruption risk while maintaining acceptable costs.
-""")
+                The supply chain department must take action to reduce disruption risk while maintaining acceptable costs.
+                """)
 
         if sea_disrupted:
             st.warning("Sea freight disruption is active. Sea routes have a higher delay risk.")

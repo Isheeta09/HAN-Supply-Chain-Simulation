@@ -2398,11 +2398,11 @@ elif page == "📋 Quarter Summary":
 # AI Learning Coach
 # =====================================
 
-    if True:
+if True:
 
-    st.markdown("## 🤖 AI Learning Coach")
+st.markdown("## 🤖 AI Learning Coach")
 
-    ai_feedback = "TEST: AI coach section is working."
+ai_feedback = "TEST: AI coach section is working."
 
     st.info(ai_feedback)
 
